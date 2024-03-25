@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fdb41119-7b02-4286-92c9-8a9131e5e3ed" name="Changes" comment="Mongo connected, register user">
-      <change beforePath="$PROJECT_DIR$/app/server.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/components/login/login.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/components/login/login.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/components/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/components/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/components/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/components/login/login.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,14 +45,14 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "front-end",
-    "last_opened_file_path": "C:/Users/jouke/Documents/GitHub/Angular/jukebox",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/jouke/Documents/GitHub/Angular/jukebox/frontend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "npm.nodemon.executor": "Debug",
+    "npm.nodemon.executor": "Run",
     "npm.start.executor": "Run",
     "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2023.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
@@ -57,7 +63,7 @@
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="nodemon" />
+        <script value="start" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -77,6 +83,8 @@
       <workItem from="1711367290304" duration="3873000" />
       <workItem from="1711396584057" duration="470000" />
       <workItem from="1711397127157" duration="298000" />
+      <workItem from="1711397605158" duration="11000" />
+      <workItem from="1711397616943" duration="293000" />
     </task>
     <task id="LOCAL-00001" summary="Mongo connected, register user">
       <option name="closed" value="true" />

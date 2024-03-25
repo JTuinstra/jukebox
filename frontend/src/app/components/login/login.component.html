@@ -1,15 +1,30 @@
-
-<form (ngSubmit)="onSubmit()">
-  <h1>Login</h1>
+<form style="height: {{isRegistering ? '40em' : '27em'}}" (ngSubmit)="onSubmit()">
+  <h1>{{ isRegistering ? 'Register' : 'Login' }}</h1>
 
 
   <div>
     <label for="username">Username:</label>
     <input type="text" id="username" [(ngModel)]="username" name="username" required>
   </div>
+
+  <div *ngIf="isRegistering">
+    <label for="email">Email:</label>
+    <input type="email" id="email" [(ngModel)]="email" name="email" required>
+  </div>
+
   <div>
     <label for="password">Password:</label>
     <input type="password" id="password" [(ngModel)]="password" name="password" required>
   </div>
-  <button type="submit">Login</button>
+
+  <div *ngIf="isRegistering">
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+  </div>
+
+  <button type="submit">{{ isRegistering ? 'Create account' : 'Login' }}</button>
+
+  <div id="hyperlink">
+    <a (click)="isRegistering = !isRegistering">{{ isRegistering ? 'Login' : 'Register' }}</a>
+  </div>
 </form>

@@ -6,17 +6,15 @@ const cors = require("cors");
 
 async function connect () {
     try{
-        await mongoose.connect("mongodb+srv://jouke:5kG6HeZ444X7XzaX@database.0g46892.mongodb.net/?retryWrites=true&w=majority&appName=database", {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log('Connected to MongoDB');
+        await mongoose.connect("mongodb+srv://jouke:5kG6HeZ444X7XzaX@database.0g46892.mongodb.net/?retryWrites=true&w=majority&appName=database");
     } catch (err) {
         console.error(err);
     }
 }
 
-connect();
+connect().then(() => {
+    console.log("Connected to database");
+});
 
 app.use(cors());
 app.use(express.json());
@@ -27,3 +25,8 @@ app.listen(port, () => {
 
 
 app.use('/login', require('./routes/loginRoutes'));
+app.post('/', (req, res) => {
+    res.send("Hello world");
+    console.log('dhfuwejnfkjon')
+});
+

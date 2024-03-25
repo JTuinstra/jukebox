@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environment";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,11 @@ export class LoginService {
   }
 
   login(username: string, password: string) {
-    return this.http.get('/login', {observe: 'response', params: {username: username, password: password}})
+    console.log(`${environment.url}/`)
+    return this.http.post(`${environment.url}/`, {username: username, password: password}, {observe: 'response'})
+  }
+
+  register(username: string, email: string, password: string) {
+    return this.http.post(`${environment.url}/login/register`, {username: username, email: email, password: password}, {observe: 'response'})
   }
 }

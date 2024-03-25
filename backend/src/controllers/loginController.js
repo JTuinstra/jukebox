@@ -1,3 +1,5 @@
+const userModel = require('../models/userModel');
+
 const Controller = class LoginController {
 
     constructor() {
@@ -7,9 +9,11 @@ const Controller = class LoginController {
         console.log(req.body);
     }
 
-    createUser(req, res) {
-
+    async createUser(req, res) {
+        console.log(req.body)
+        await userModel.create(req.body);
     }
+
 }
 
 module.exports = {
