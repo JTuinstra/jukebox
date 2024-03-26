@@ -6,7 +6,7 @@ const cors = require("cors");
 
 async function connect () {
     try{
-        await mongoose.connect("mongodb+srv://jouke:5kG6HeZ444X7XzaX@database.0g46892.mongodb.net/?retryWrites=true&w=majority&appName=database");
+        await mongoose.connect("mongodb+srv://jouke:5kG6HeZ444X7XzaX@database.0g46892.mongodb.net/jukebox\n");
     } catch (err) {
         console.error(err);
     }
