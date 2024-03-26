@@ -1,8 +1,10 @@
 const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000; // You can use environment variables for port configuration
+const session = require('express-session');
 const mongoose = require('mongoose');
 const cors = require("cors");
+
+const port = process.env.PORT || 3000;
+const app = express();
 
 async function connect () {
     try{
@@ -19,14 +21,18 @@ connect().then(() => {
 app.use(cors());
 app.use(express.json());
 
+app.use(session({
+    secret: 'your_secret_key',
+    reSave: false,
+    saveUninitialized: false
+}));
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
 
 app.use('/login', require('./routes/loginRoutes'));
-app.post('/', (req, res) => {
-    res.send("Hello world");
-    console.log('dhfuwejnfkjon')
-});
+app.use('/session', require('./routes/sessionRoutes'));
+
 

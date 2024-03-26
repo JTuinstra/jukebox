@@ -7,6 +7,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {RouteHelperComponent} from './components/route-helper/route-helper.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from "@angular/material/input";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -21,6 +25,10 @@ import {RouteHelperComponent} from './components/route-helper/route-helper.compo
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [RouteHelperComponent]

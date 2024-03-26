@@ -5,6 +5,7 @@ const schema = new Schema({
     username: {type: String, required: true},
     password: {type: String, required: true},
     email: {type: String, required: true},
+    isLoggedIn: {type: Schema.Types.Mixed, default: false}
 
 }, {
     timestamps: true,

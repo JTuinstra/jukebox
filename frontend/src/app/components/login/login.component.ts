@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
 import {LoginService} from "../../services/login/loginService";
 import {Router, RouterLink} from "@angular/router";
@@ -8,7 +8,7 @@ import {Router, RouterLink} from "@angular/router";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username: string = '';
   email: string = '';
   password: string = '';
@@ -39,7 +39,6 @@ export class LoginComponent {
 
       this.loginService.login(this.username, this.password).subscribe(
         (response) => {
-          console.log(response);
           Swal.fire({
             icon: response.type,
             title: response.type[0].toUpperCase() + response.type.slice(1),
@@ -48,8 +47,10 @@ export class LoginComponent {
             allowOutsideClick: false
           }).then(() => {
             this.loginService.isLoggedIn.next(true);
-            localStorage.setItem('user', this.username);
+            console.log(response)
+            localStorage.setItem('user', JSON.stringify({user: response.data}));
             localStorage.setItem('isLoggedIn', 'true');
+            this.router.navigate(['dashboard']);
           });
         },
         (error) => {

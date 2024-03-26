@@ -1,15 +1,25 @@
-<!-- dashboard.component.html -->
-<div *ngIf="loginService.isLoggedIn.value">
-  <h1>Welcome, {{ user }}</h1> <!-- assuming the user object has a username property -->
+<div *ngIf="loginService.isLoggedIn.value" class="navbar">
+  <div class="navbar-content">
+    <mat-icon (click)="showAccount()" class="account-icon">account_circle</mat-icon>
+    <h1 class="welcome-message">Welcome, {{ user.username }}</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Search Songs">
+      <button onclick="search()">Search</button>
+    </div>
 
-  <h2>Your Playlists</h2>
-  <ul>
-    <li *ngFor="let playlist of playlists">{{ playlist.name }}</li> <!-- assuming each playlist has a name property -->
-  </ul>
-
-  <h2>Search Songs</h2>
-  <input type="text" [formControl]="searchControl">
-  <button (click)="search()">Search</button>
-  <button (click)="loginService.logout()">Logout</button>
+  </div>
+  <button mat-icon-button class="matIcon-button">
+    <mat-icon>settings</mat-icon>
+  </button>
+  <button mat-icon-button class="matIcon-button" (click)="loginService.logout()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
 </div>
 
+<!-- Content goes here -->
+<div class="content">
+  <h2>Your Playlists</h2>
+  <ul>
+    <li *ngFor="let playlist of playlists">{{ playlist.name }}</li>
+  </ul>
+</div>

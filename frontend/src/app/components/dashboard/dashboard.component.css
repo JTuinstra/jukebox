@@ -1,0 +1,68 @@
+.navbar {
+  background-color: #1976d2;
+  color: #fff;
+  padding: 15px; /* Increase padding for a larger appearance */
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 2em;
+  left: 2%; /* Ensure the navbar is aligned to the left edge of the screen */
+  width: 95%;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.account-icon {
+  margin-right: 2em; /* Reduced margin to balance the spacing */
+}
+
+.welcome-message {
+  margin: 0;
+  font-size: 1.2em; /* Increase font size for a bigger welcome message */
+}
+
+.search-bar {
+  margin-left: 3em; /* Adjusted margin to balance the spacing */
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 6px; /* Adjusted padding for better appearance */
+}
+
+.search-bar input[type="text"] {
+  flex: 1;
+  padding: 6px 12px; /* Adjusted padding for better appearance */
+  border: none;
+  font-size: 16px;
+}
+
+.search-bar button {
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 6px 16px; /* Adjusted padding for better appearance */
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #135ba1;
+}
+
+.matIcon-button {
+  margin-left: auto; /* Push the logout button to the right side */
+}
+
+.content {
+  margin-top: 70px; /* Increased margin-top for better spacing */
+  padding: 20px;
+  font-size: 16px; /* Increase font size for a more professional appearance */
+}

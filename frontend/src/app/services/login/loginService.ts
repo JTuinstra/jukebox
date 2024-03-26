@@ -33,7 +33,10 @@ export class LoginService {
   logout() {
     this.isLoggedIn.next(false);
     this.router.navigate(['/login']);
-    localStorage.removeItem('isLoggedIn');
+    localStorage.setItem('isLoggedIn', 'false');
+    const user = localStorage.getItem('user');
+    // the user will be parsed in the backend
+    this.http.post(`${this.url}/session/logout`, {user}).subscribe();
   }
 
   private getInitialLoginStatus(): boolean {

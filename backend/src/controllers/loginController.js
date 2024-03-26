@@ -7,12 +7,17 @@ const Controller = class LoginController {
     }
 
     verifyCredentials(req, res) {
+        console.log(req)
         userModel.findOne({$or: [{username: req.body.username}, {email: req.body.email}]}).then((data) => {
             if (data === null) {
-                res.status(404).json({type: "error" ,message: "User not found"});
+                res.status(404).json({type: "error", message: "User not found"});
             } else {
                 if (compareSync(req.body.password, data.password)) {
-                    res.status(200).json({type: "success", message: "Credentials verified"});
+                    userModel.findByIdAndUpdate(data._id, {isLoggedIn: new Date()}).then((data) => {
+                    });
+                    data.password = undefined;
+
+                    res.status(200).json({type: "success", message: "Credentials verified", data: data});
                 } else {
                     res.status(401).json({type: "error", message: "Invalid credentials"});
                 }

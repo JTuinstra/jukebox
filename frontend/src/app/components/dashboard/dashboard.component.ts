@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import {LoginService} from "../../services/login/loginService";
 import {Router, RouterLink} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-dashboard',
@@ -18,14 +19,22 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('isLoggedIn') === 'true') {
-      this.user = localStorage.getItem('user');
-      console.log(this.user);
+      this.user = JSON.parse(localStorage.getItem('user') || '{}').user;
     } else {
       this.router.navigate(['/login']);
     }
   }
 
   search() {
+  }
+
+  showAccount() {
+    Swal.fire({
+      title: 'Account',
+      html: `<p>Username: ${this.user.username}</p><p>Email: ${this.user.email}</p>`,
+      confirmButtonText: 'Close',
+      heightAuto: false
+    });
   }
 
 
