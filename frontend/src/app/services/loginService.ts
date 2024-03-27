@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
-import {environment} from "../../environment";
+import {environment} from "../environment";
 import {HttpClient} from "@angular/common/http";
 import Swal from "sweetalert2";
-import {ResponseInterface} from "../../responseInterface";
+import {ResponseInterface} from "../responseInterface";
 import {BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
 

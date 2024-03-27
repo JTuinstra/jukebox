@@ -6,8 +6,8 @@ const cors = require("cors");
 const port = process.env.PORT || 3000;
 const app = express();
 
-async function connect () {
-    try{
+async function connect() {
+    try {
         await mongoose.connect("mongodb+srv://jouke:5kG6HeZ444X7XzaX@database.0g46892.mongodb.net/jukebox\n");
     } catch (err) {
         console.error(err);
@@ -34,5 +34,6 @@ app.listen(port, () => {
 
 app.use('/login', require('./routes/loginRoutes'));
 app.use('/session', require('./routes/sessionRoutes'));
+app.use('/spotify', require('./routes/spotifyRoutes'));
 
 

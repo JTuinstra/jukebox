@@ -2,24 +2,28 @@
   <div class="navbar-content">
     <mat-icon (click)="showAccount()" class="account-icon">account_circle</mat-icon>
     <h1 class="welcome-message">Welcome, {{ user.username }}</h1>
+
     <div class="search-bar">
-      <input type="text" placeholder="Search Songs">
-      <button onclick="search()">Search</button>
+      <input type="text" [(ngModel)]="searchValue" placeholder="Search Songs">
+      <select [(ngModel)]="selectedOption" class="search-select">
+        <option *ngFor="let option of searchOptions" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+      <button (click)="search()">Search</button>
     </div>
+
 
   </div>
   <button mat-icon-button class="matIcon-button">
     <mat-icon>settings</mat-icon>
   </button>
-  <button mat-icon-button class="matIcon-button" (click)="loginService.logout()">
+  <button mat-icon-button class="matIcon-button" (click)="logoutSwal()">
     <mat-icon>exit_to_app</mat-icon>
   </button>
 </div>
 
 <!-- Content goes here -->
 <div class="content">
-  <h2>Your Playlists</h2>
-  <ul>
-    <li *ngFor="let playlist of playlists">{{ playlist.name }}</li>
-  </ul>
+  <h1 class="title"></h1>
 </div>

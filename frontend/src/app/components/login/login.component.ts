@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
-import {LoginService} from "../../services/login/loginService";
+import {LoginService} from "../../services/loginService";
 import {Router, RouterLink} from "@angular/router";
 
 @Component({
@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
             console.log(response)
             localStorage.setItem('user', JSON.stringify({user: response.data}));
             localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('access_token', JSON.stringify(response.access_token));
             this.router.navigate(['dashboard']);
           });
         },
