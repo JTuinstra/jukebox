@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit {
             console.log(response)
             localStorage.setItem('user', JSON.stringify({user: response.data}));
             localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('access_token', JSON.stringify(response.access_token));
             this.router.navigate(['dashboard']);
           });
         },

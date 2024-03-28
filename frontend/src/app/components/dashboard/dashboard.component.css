@@ -1,3 +1,4 @@
+/* Navbar */
 .navbar {
   background-color: #1976d2;
   color: #fff;
@@ -72,8 +73,42 @@
   margin-left: auto; /* Push the logout button to the right side */
 }
 
+/* Content */
 .content {
-  margin-top: 70px; /* Increased margin-top for better spacing */
-  padding: 20px;
-  font-size: 16px; /* Increase font size for a more professional appearance */
+  width: 90%;
+  margin: 20px auto; /* Center the content */
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.content p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5; /* Increase line height for better readability */
+}
+
+.content p:first-child {
+  font-style: italic;
+}
+
+.content p:nth-child(2) {
+  font-weight: bold;
+}
+
+/* Hyperlink Styling */
+.content a {
+  color: #1976d2; /* Set hyperlink color */
+  text-decoration: none; /* Remove underline */
+}
+
+.content a:hover {
+  text-decoration: underline; /* Add underline on hover */
 }

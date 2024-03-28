@@ -1,51 +1,64 @@
 const axios = require('axios');
 const GenericController = require("./genericController");
+const userModel = require("../models/userModel");
+let access_token = '';
 
-
-const Controller = class spotifyController extends GenericController{
+const Controller = class spotifyController extends GenericController {
 
     constructor() {
         super();
         this.startSearch = this.startSearch.bind(this);
         this.searchAnything = this.searchAnything.bind(this);
-
     }
 
     async searchAnything(req, res) {
         const searchValue = req.query.searchValue;
         const searchOption = req.query.selectedOption.toLowerCase();
-        const access_token = req.query.access_token
+        const userId = req.query.userId;
 
-        await this.startSearch(searchValue, searchOption, access_token, res)
+        if (access_token === '') {
+            access_token = await this.getAccessTokenFromDB(userId);
+        }
+
+        await this.startSearch(searchValue, searchOption, userId, res)
     }
 
 
-    async startSearch(searchValue, searchOption, access_token, res) {
-        console.log(access_token)
+    async startSearch(searchValue, searchOption, userId, res) {
         const headers = {
-            'Authorization': 'Bearer ' + access_token,
-            'Content-Type': 'application/json'
+            'Authorization': 'Bearer ' + access_token, 'Content-Type': 'application/json'
         };
 
-        if (searchOption === 'all') {
-            searchOption = 'search';
-            console.log(`https://api.spotify.com/v1/${searchOption}/${searchValue}`)
-        }
-
         try {
-            const response = await axios.get(`https://api.spotify.com/v1/${searchOption}/${searchValue}`, {headers});
-            res.status(200).json({data: response.data, access_token: access_token});
+            const url = searchOption === 'all' ? `https://api.spotify.com/v1/search?q=${searchValue}&limit=20` : `https://api.spotify.com/v1/search?q=${searchValue}&type=${searchOption}&limit=20`;
+            console.log(url)
+            const response = await axios.get(url, {headers});
+            console.log(response.data)
+
+            res.status(200).json({data: response.data});
+
         } catch (error) {
-            // check if the text 'token expired' is in error
+            console.error(error)
+
             if (error.response.data.error.message.includes('token expired')) {
-                const newToken = await this.getAccessToken();
-                await this.startSearch(searchValue, searchOption, newToken, res);
+                await this.getAccessToken(userId);
+
+                await this.startSearch(searchValue, searchOption, userId, res);
+
             } else {
                 console.error('Error getting artist info', error);
-                res.status(500).json({message: 'Error getting artist info', access_token: access_token});
+                res.status(500).json({message: `Error getting ${searchOption} info`});
             }
         }
-        }
+    }
+
+    getAccessTokenFromDB(userId) {
+        return userModel.findById(userId).then((user) => {
+            return user.access_token;
+        }).catch((error) => {
+            console.error('Error getting access token', error);
+        });
+    }
 }
 
 module.exports = {

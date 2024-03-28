@@ -12,13 +12,13 @@ import {Router} from "@angular/router";
 export class SpotifyService {
 
   url = `${environment.url}`;
-  access_token = JSON.parse(localStorage.getItem('access_token') || '{}');
+  user = JSON.parse(localStorage.getItem('user') || '{}').user;
 
   constructor(private http: HttpClient, private router: Router) {
   }
 
   search(searchValue: string, selectedOption: string) {
-    return this.http.get(`${this.url}/spotify/search`, {params: {searchValue: searchValue, selectedOption: selectedOption, access_token: this.access_token}})
+    return this.http.get(`${this.url}/spotify/search`, {params: {searchValue: searchValue, selectedOption: selectedOption, userId: this.user._id}})
   }
 
 }

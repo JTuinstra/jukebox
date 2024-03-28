@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../../services/loginService";
 import {Router, RouterLink} from "@angular/router";
 import Swal from "sweetalert2";
@@ -13,12 +12,15 @@ import {SpotifyService} from "../../services/spotifyService";
 export class DashboardComponent implements OnInit {
 
   user: any;
-  artist: any;
-  searchOptions: string[] = ['All', 'Album', 'Artist', 'Playlist', 'User'];
+  searchOptions: string[] = ['Track', 'Album', 'Artist', 'Playlist'];
   searchValue: string = '';
   selectedOption: string = this.searchOptions[0];
+  searchResults: any[] = [];
+  protected readonly RouterLink = RouterLink;
+  protected readonly console = console;
 
-  constructor(private spotifyService: SpotifyService, protected loginService: LoginService, protected router: Router) { }
+  constructor(private spotifyService: SpotifyService, protected loginService: LoginService, protected router: Router) {
+  }
 
   ngOnInit() {
     if (localStorage.getItem('isLoggedIn') === 'true') {
@@ -30,10 +32,10 @@ export class DashboardComponent implements OnInit {
   }
 
   search() {
-    console.log(this.searchValue, this.selectedOption)
     if (this.searchValue) {
       this.spotifyService.search(this.searchValue, this.selectedOption).subscribe((response: any) => {
-        console.log(response)
+        this.searchResults = response.data[this.selectedOption.toLowerCase() + 's'].items;
+        console.log(this.searchResults[0]);
       });
     }
   }
@@ -62,8 +64,4 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
-
-  protected readonly RouterLink = RouterLink;
-  protected readonly console = console;
 }

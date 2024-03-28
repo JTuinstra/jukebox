@@ -20,10 +20,13 @@ const Controller = class LoginController extends GenericController {
                     userModel.findByIdAndUpdate(data._id, {isLoggedIn: new Date()}).then((data) => {
                     });
                     data.password = undefined;
+                    data.access_token = undefined;
                     data.username = data.username.charAt(0).toUpperCase() + data.username.slice(1);
 
-                    super.getAccessToken().then((token) => {
-                        res.status(200).json({type: "success", message: "Credentials verified", data: data, access_token: token});
+                    super.getAccessToken(data._id).then(() => {
+                        res.status(200).json({
+                            type: "success", message: "Credentials verified", data: data
+                        });
                     });
 
                 } else {
