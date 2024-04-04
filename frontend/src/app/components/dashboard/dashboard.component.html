@@ -13,6 +13,7 @@
       <button (click)="search()">Search</button>
     </div>
 
+    <button class="getPlaylistButton" (click)="searchResults = []">View your playlists</button>
 
   </div>
   <button mat-icon-button class="matIcon-button">
@@ -21,15 +22,53 @@
   <button mat-icon-button class="matIcon-button" (click)="logoutSwal()">
     <mat-icon>exit_to_app</mat-icon>
   </button>
+
 </div>
 
+<div class="playlist-container" *ngIf="searchResults.length === 0">
+
+  <div>
+    <button class="add-to-playlist-button" (click)="getPlaylists()">Refresh playlists</button>
+    <button style="margin-left: 3em;" class="add-to-playlist-button" (click)="createPlaylist()">Create playlist</button>
+  </div>
+
+
+
+  <div *ngFor="let playlist of playlists">
+
+    <h2>{{ playlist.name }}</h2>
+    <h4>Description: {{ playlist.description }}</h4>
+
+    <div *ngFor="let track of playlist.tracks" class="playlist">
+
+      <img [src]="track.album.images[2]?.url || 'assets/imageNotFound.jpg'" alt="Album Cover" class="track-image">
+
+      <div class="track-details">
+        <p class="track-name">{{ track.name }}</p>
+        <p class="track-artist">{{ track.artists[0].name }}</p>
+        <p class="track-album">{{ track.album.name }}</p>
+        <p *ngIf="track.type === 'track'" class="track-duration">{{ track.duration_ms | date:'mm:ss' : 'UTC' }} <a
+          [href]="track.artists[0].external_urls.spotify" target="_blank" class="spotify-link">Artist's Page</a> <a
+          [href]="track.external_urls.spotify" target="_blank" class="spotify-link">Listen on Spotify</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div style="margin-top: 15em;">
+
   <div *ngFor="let result of searchResults" class="content" [ngSwitch]="result.type">
 
-    <h2>{{ result.name }}</h2>
+    <h2>{{ result.name }}
+      <button style="margin-left: 1em" *ngIf="result.type === 'track'" class="add-to-playlist-button"
+              (click)="addToPlaylist(result)">Add to Playlist
+      </button>
+    </h2>
 
     <ng-container *ngSwitchCase="'track'">
-      <p>Artist: {{ result.artists[0].name }}</p>
+
+      <p>Artist: {{ result.artists[0].name }} </p>
 
       <a [href]="result.artists[0].external_urls.spotify">
         Artists page: {{ result.artists[0].external_urls.spotify }}</a>
@@ -40,8 +79,8 @@
 
       <br>
       <p><a [href]="result.external_urls.spotify" target="_blank">Listen on Spotify</a></p>
-      <img [src]="result.album.images[1]?.url || 'assets/imageNotFound.jpg'" alt="Album Cover">
 
+      <img width="300" height="300" [src]="result.album.images[1]?.url || 'assets/imageNotFound.jpg'" alt="Album Cover">
 
     </ng-container>
 
@@ -54,7 +93,7 @@
 
       <br>
       <p><a [href]="result.external_urls.spotify">Open on Spotify</a></p>
-      <img [src]="result.images[1]?.url || 'assets/imageNotFound.jpg'" alt="Album Cover">
+      <img width="300" height="300" [src]="result.images[1]?.url || 'assets/imageNotFound.jpg'" alt="Album Cover">
     </ng-container>
 
     <ng-container *ngSwitchCase="'artist'">
@@ -64,20 +103,21 @@
 
       <br>
       <p><a [href]="result.external_urls.spotify">Open on Spotify</a></p>
-      <img [src]="result.images[1]?.url || 'assets/imageNotFound.jpg'" alt="Artist Image">
+      <img width="300" height="300" [src]="result.images[1]?.url || 'assets/imageNotFound.jpg'" alt="Artist Image">
     </ng-container>
 
     <ng-container *ngSwitchCase="'playlist'">
-      <p>Description: {{result.description}}</p>
+      <p>Description: {{ result.description }}</p>
 
       <p>Owner: {{ result.owner.display_name }}</p>
       <p>Tracks: {{ result.tracks.total }}</p>
-      <p><a [href]="result.owner.external_urls.spotify">{{result.owner.display_name}}</a></p>
+      <p><a [href]="result.owner.external_urls.spotify">{{ result.owner.display_name }}</a></p>
 
 
       <br>
       <p><a [href]="result.external_urls.spotify">Open on Spotify</a></p>
-      <img [src]="result.images[1]?.url || result.images[0].url || 'assets/imageNotFound.jpg'" alt="Playlist Image">
+      <img width="300" height="300" [src]="result.images[1]?.url || result.images[0].url || 'assets/imageNotFound.jpg'"
+           alt="Playlist Image">
     </ng-container>
 
   </div>

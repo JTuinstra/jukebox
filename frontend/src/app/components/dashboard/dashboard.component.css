@@ -112,3 +112,103 @@
 .content a:hover {
   text-decoration: underline; /* Add underline on hover */
 }
+
+.add-to-playlist-button {
+  background-color: #1976d2;
+  color: white;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-playlist-button:hover {
+  background-color: #135ba1;
+}
+
+.track-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  padding: 1em;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.track-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 1em;
+}
+
+.track-details {
+  flex-grow: 1;
+}
+
+.track-name {
+  font-weight: bold;
+}
+
+.track-artist, .track-album, .track-duration {
+  color: #666;
+}
+
+.track-links {
+  margin-left: auto;
+}
+
+.spotify-link {
+  margin-left: 1em;
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.spotify-link:hover {
+  text-decoration: underline;
+}
+
+.playlist-container > div {
+  height: 20em; /* Adjust as needed */
+  overflow: auto; /* Add a scrollbar if the content exceeds the height */
+}
+
+.track-container {
+  height: 10em; /* Adjust as needed */
+  overflow: auto; /* Add a scrollbar if the content exceeds the height */
+}
+img {
+  border-radius: 3%;
+}
+
+.getPlaylistButton {
+  margin-left: 5em;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.getPlaylistButton:hover {
+  background-color: #1976d2;
+}
+
+.playlist {
+  background-color: #f0f0f0; /* Change the background color to light grey */
+  border: 2px solid black; /* Change the border color to deep sky blue */
+  border-radius: 10px; /* Increase the border radius for rounded corners */
+  padding: 20px; /* Increase the padding for more space around the content */
+  margin-bottom: 20px; /* Increase the margin-bottom for more space between playlists */
+}
+
+.playlist h2 {
+  color: #1976d2; /* Change the playlist name color to deep sky blue */
+  font-size: 24px; /* Increase the font size for a bigger playlist name */
+}
+
+.playlist h4 {
+  color: #666; /* Change the playlist description color to dark grey */
+  font-size: 18px; /* Increase the font size for a bigger playlist description */
+}

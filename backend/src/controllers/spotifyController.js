@@ -42,12 +42,13 @@ const Controller = class spotifyController extends GenericController {
 
             if (error.response.data.error.message.includes('token expired')) {
                 await this.getAccessToken(userId);
+                access_token = await this.getAccessTokenFromDB(userId);
 
                 await this.startSearch(searchValue, searchOption, userId, res);
 
             } else {
                 console.error('Error getting artist info', error);
-                res.status(500).json({message: `Error getting ${searchOption} info`});
+                res.status(500).json({type: 'error', message: `Error getting ${searchOption} info`});
             }
         }
     }
@@ -57,6 +58,65 @@ const Controller = class spotifyController extends GenericController {
             return user.access_token;
         }).catch((error) => {
             console.error('Error getting access token', error);
+        });
+    }
+
+    createPlaylist(req, res) {
+        const userId = req.body.userId;
+        const playlistName = req.body.playlistName;
+        const playlistDescription = req.body.playlistDescription;
+
+        userModel.findById(userId).then((user) => {
+            const newPlaylist = {
+                name: playlistName,
+                description: playlistDescription,
+                tracks: []
+            };
+
+            user.playlists.push(newPlaylist);
+
+            user.markModified('playlists');
+            user.save().then(() => {
+                res.status(200).json({
+                    type: 'success',
+                    message: 'Playlist created successfully',
+                });
+            });
+        });
+    }
+
+    addTrackToPlaylist(req, res) {
+        const userId = req.body.userId;
+        const track = req.body.track;
+        const playlistName = req.body.playlistName;
+
+        userModel.findByIdAndUpdate(userId).then((user) => {
+            const playlist = user.playlists.find((playlist) => playlist.name === playlistName);
+            playlist.tracks.push(track);
+
+            console.log(user);
+
+            user.markModified('playlists');
+            user.save().then(() => {
+                res.status(200).json({
+                    type: 'success',
+                    message: 'Track added to playlist successfully',
+                });
+            });
+        });
+    }
+
+    getPlaylists(req, res) {
+        const userId = req.query.userId;
+
+        userModel.findById(userId).then((user) => {
+            res.status(200).json({
+                type: 'success',
+                playlists: user.playlists
+            });
+        }).catch((error) => {
+            console.error('Error getting playlists', error);
+            res.status(500).json({type: 'error', message: 'Error getting playlists'});
         });
     }
 }

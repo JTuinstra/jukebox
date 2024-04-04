@@ -6,7 +6,8 @@ const schema = new Schema({
     password: {type: String, required: true},
     email: {type: String, required: true},
     isLoggedIn: {type: Schema.Types.Mixed, default: false},
-    access_token: {type: String, required: false}
+    access_token: {type: String, required: false},
+    playlists: {type: Schema.Types.Mixed, default: []}
 
 }, {
     timestamps: true,
